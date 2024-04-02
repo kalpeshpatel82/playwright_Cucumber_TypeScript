@@ -10,7 +10,7 @@ let context: BrowserContext;
 
 //let page: Page;
 BeforeAll(async function () {
-    getEnv();
+   getEnv();
     browser = await invokeBrowser();
     //browser = await chromium.launch({ headless: false });
 

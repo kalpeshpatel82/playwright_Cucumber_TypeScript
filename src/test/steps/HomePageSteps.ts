@@ -5,7 +5,7 @@ import { fixture } from "../../hooks/pageFixture";
 setDefaultTimeout(60 * 1000 * 2);
 
 Given('I am on homepage', async function () {
-    await fixture.page.goto("https://www.bnpparibasfortis.be");
+    await fixture.page.goto(process.env.BASEURL);
 });
 
 When('I accept the cookies', async function () {
