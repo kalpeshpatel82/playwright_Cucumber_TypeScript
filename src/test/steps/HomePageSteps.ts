@@ -6,11 +6,13 @@ setDefaultTimeout(60 * 1000 * 2);
 
 Given('I am on homepage', async function () {
     await fixture.page.goto(process.env.BASEURL);
+    fixture.logger.info("Navigated to the application.");
 });
 
 When('I accept the cookies', async function () {
     // await page.frame("#cc_iframe1");
     // await page.waitForLoadState('domcontentloaded');
+    fixture.logger.info("Clicking on Cookies consent CTA button.");
     await fixture.page.frameLocator("#cc_iframe1").getByText("Accepter les cookies").click();
 });
 
@@ -21,12 +23,12 @@ Then('I click on each links of first primary megamenu and verify', async functio
     const first_secondary_link = fixture.page.locator("xpath=//div[@id='la-banque-au-quotidien']//div[contains(@class,'flyout-links')]/ul/li/a");
     let index = await first_secondary_link.count();
     index = 3; //remove this line to click on all links 
-        for (let i = 0; i < await index; i++) {
+    for (let i = 0; i < await index; i++) {
         await first_primary_link.click();
+        fixture.logger.info("Clicking on First primary mega menu link.");
         await fixture.page.waitForLoadState('domcontentloaded');
         await first_secondary_link.nth(i).click();
-
-    
+        fixture.logger.info("Clicking on First secondary mega menu link : " + i);
         await fixture.page.waitForLoadState('domcontentloaded');
 
         // soft assert 

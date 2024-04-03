@@ -3,6 +3,8 @@ import { chromium, Browser, BrowserContext } from '@playwright/test';
 import { fixture } from "./pageFixture";
 import { invokeBrowser } from "../helper/browsers/browserManager";
 import { getEnv } from "../helper/env/env";
+import { createLogger } from "winston";
+import { options } from "../helper/util/logger";
 
 
 let browser: Browser;
@@ -16,10 +18,12 @@ BeforeAll(async function () {
 
 })
 
-Before(async function () {
+Before(async function ({pickle}) {
+    const scenarioName = pickle.name + pickle.id;
     context = await browser.newContext();
     const page = await browser.newPage();
     fixture.page = page;
+    fixture.logger = createLogger(options(scenarioName))
 })
 
 AfterStep(async function ({ pickle, result }) {
@@ -55,4 +59,5 @@ After(async function ({ pickle, result }) {
 AfterAll(async function () {
     //Close browser completely 
     await browser.close();
+    fixture.logger.close();
 })
