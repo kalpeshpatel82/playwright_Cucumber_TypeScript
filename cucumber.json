@@ -4,7 +4,7 @@
       "snippetInterface": "async-await"
     },
     "paths": [
-      "src/test/features/header.feature"
+      "src/test/features/preFooter.feature"
     ],
     "dryRun": false,
     "require": [
@@ -20,7 +20,8 @@
       "json:test-results/cucumber-report.json",
       "rerun:@rerun.txt"
     ],
-    "parallel": 2
+    "tags":"@check",
+    "parallel": 3
   },
   "rerun": {
     "formatOptions": {

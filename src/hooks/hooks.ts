@@ -27,20 +27,15 @@ Before(async function ({pickle}) {
 })
 
 AfterStep(async function ({ pickle, result }) {
-
-    //Screenshot after every steps -- uncomment following lines 
-
+    //Screenshot after every steps -- uncomment following lines
     let img: Buffer;
     console.log(result?.status);
-
     img = await fixture.page.screenshot(
         { path: `./test-results/screenshots/${pickle.name}.png`, type: "png" })
     await this.attach(img, "image/png");
-
 })
 
 After(async function ({ pickle, result }) {
-
     // Screenshot in case of Scenario fails
     let img: Buffer;
     console.log(result?.status);
@@ -49,9 +44,7 @@ After(async function ({ pickle, result }) {
             { path: `./test-results/screenshots/${pickle.name}.png`, type: "png" })
         await this.attach(img, "image/png");
     }
-
-
-    //Close browser Session 
+    //Close browser Session
     await fixture.page.close();
     await context.close();
 })
@@ -59,5 +52,5 @@ After(async function ({ pickle, result }) {
 AfterAll(async function () {
     //Close browser completely 
     await browser.close();
-    fixture.logger.close();
+    //fixture.logger.close();
 })
